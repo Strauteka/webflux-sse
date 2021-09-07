@@ -30,7 +30,6 @@ public abstract class Notify {
 
     private final Long time = System.currentTimeMillis();
 
-
     @ToString.Include
     @JsonProperty(SERIALIZER_KEY)
     public abstract Key getKey();

@@ -26,13 +26,12 @@ public class SseController {
 
     @GetMapping(value = "v1", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
      Flux<Notify> getNotify() {
-        return this.notifyFlux;
+        return this.notifyFlux.doOnCancel(() -> log.info("Sse Canceled"));
     }
-
 
     @GetMapping(value = "v2",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     Flux<ServerSentEvent<Notify>> notifyServerSentEvent() {
-        return this.notifyServerSentEvent;
+        return this.notifyServerSentEvent.doOnCancel(() -> log.info("Sse Canceled"));
     }
 
     @GetMapping(value = "v1/{event}",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
